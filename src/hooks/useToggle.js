@@ -1,4 +1,4 @@
-import { useLayoutEffect } from 'react'
+import { useCallback } from 'react'
 import { useReducer } from 'react'
 
 const reducer = (state, action) => {
@@ -15,18 +15,17 @@ const reducer = (state, action) => {
 }
 
 export function useToggle(initialValue) {
-  const [value, dispatch] = useReducer(reducer, initialValue)
+  const [value, dispatch] = useReducer(reducer, initialValue[0])
 
-  useLayoutEffect(() => {
-    toggle()
-  }, [])
-
-  const toggle = (value = initialValue) => {
-    dispatch({
-      type: 'TOGGLE',
-      payload: value,
-    })
-  }
+  const toggle = useCallback(
+    (value = initialValue) => {
+      dispatch({
+        type: 'TOGGLE',
+        payload: value,
+      })
+    },
+    [initialValue]
+  )
 
   return [value, toggle]
 }
