@@ -4,7 +4,6 @@ import './App.css'
 
 export function Demo() {
   const [value, toggle] = useToggle(['blue', 'orange', 'cyan', 'teal'])
-  // const [value, toggle] = useToggle(['light', 'dark'])
 
   return (
     <>
